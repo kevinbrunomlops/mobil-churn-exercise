@@ -1,21 +1,51 @@
 name: CI
 
 on: push
+  
 
 jobs:
-  allt:
+  test:
+    name: Tester python ${{ matrix.python-version }}
     runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+
     steps:
-      - uses: actions/checkout@v7
+      - name: Checkout repository
+        uses: actions/checkout@v7
 
       - uses: actions/setup-python@v7
         with:
-          python-version: "3.13"
+          python-version: ${{ matrix.python-version }}
           cache: "pip"
           cache-dependency-path: "pyproject.toml"
+      
+      - name: Install dependencies
+        run: pip install -e ".[dev]"
+      
+      - name: Run tests
+        run: pytest      
+  
+  train:
+    needs: test
+    runs-on: ubuntu-latest
 
-      - run: pip install -e ".[dev]"
+    steps:
+        - name: Checkout repository
+          uses: actions/checkout@v4
 
-      - run: pytest
+        - name: Setup Python 3.11
+          uses: actions/setup-python@v6
+          with:
+            python-version: "3.11"
+            cache: pip
+            cache-dependency-path: pyproject.toml
+        
+        - name: Install dependencies
+          run: pip install -e ".[dev]"
 
-      - run: python -m churn.model
+        - name: Train model
+          run: python -m churn.model 
