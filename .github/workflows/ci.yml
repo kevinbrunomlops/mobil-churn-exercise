@@ -5,6 +5,8 @@ on:
   push:
     branches: [main]
   pull_request:
+    branches: [main]
+
 
 jobs:
   test:
@@ -88,6 +90,8 @@ jobs:
           path: outputs/
 
       - name: Evaluate model quality
+        env:
+          MIN_ROC_AUC: "0.99"
         run: python -m churn.evaluate
 
       - name: Write metrics to Summary
