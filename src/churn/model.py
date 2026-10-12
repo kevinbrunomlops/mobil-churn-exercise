@@ -19,7 +19,7 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 from churn.data import DATAKATALOG, KATEGORISKA, NUMERISKA, dela_upp, las_data, skapa_features
 
-# Concurrency test - first push
+# Concurrency test - second push
 
 SEED = 42
 DATAFIL = "kundbas.csv"
