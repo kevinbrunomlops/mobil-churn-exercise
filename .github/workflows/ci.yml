@@ -85,7 +85,9 @@ jobs:
     name: Evaluate model
     needs: train
     runs-on: ubuntu-latest
-
+    env:
+      MIN_ROC_AUC: "0.99"
+      
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
