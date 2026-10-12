@@ -46,15 +46,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v6
+      - name: Setup Python environment
+        uses: ./.github/actions/setup-python-env 
         with:
           python-version: ${{ matrix.python-version }}
-          cache: pip
-          cache-dependency-path: pyproject.toml
-
-      - name: Install dependencies
-        run: pip install -e ".[dev]"
 
       - name: Run tests
         run: pytest
@@ -68,12 +63,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Python 3.11
-        uses: actions/setup-python@v6
+      - name: Setup Python environment
+        uses: ./.github/actions/setup-python-env
         with:
           python-version: "3.11"
-          cache: pip
-          cache-dependency-path: pyproject.toml
 
       - name: Install dependencies
         run: pip install -e ".[dev]"
@@ -97,12 +90,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Python 3.11
-        uses: actions/setup-python@v6
+      - name: Setup Python environment
+        uses: ./.github/actions/setup-python-env
         with:
           python-version: "3.11"
-          cache: pip
-          cache-dependency-path: pyproject.toml
 
       - name: Install dependencies
         run: pip install -e ".[dev]"
@@ -136,12 +127,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Python 3.11
-        uses: actions/setup-python@v6
+      - name: Setup Python environment
+        uses: ./.github/actions/setup-python-env
         with:
           python-version: "3.11"
-          cache: pip
-          cache-dependency-path: pyproject.toml
 
       - name: Install dependencies
         run: pip install -e ".[dev]"
