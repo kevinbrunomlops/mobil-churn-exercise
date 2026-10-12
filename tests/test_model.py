@@ -37,7 +37,7 @@ def test_reproducerbar(resultat):
 def test_roc_auc_minst_070(resultat):
     _, matvarden = resultat
 
-    assert matvarden["roc_auc"] >= 1.01, (
+    assert matvarden["roc_auc"] >= 0.70, (
         f"ROC AUC för låg: {matvarden['roc_auc']:.3f}."
     )
 
