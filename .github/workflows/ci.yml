@@ -29,6 +29,15 @@ on:
       timezone: "Europe/Stockholm"
 
   workflow_dispatch:
+    inputs:
+      datafil:
+        description: "Välj CSV-fil för datavalidering"
+        required: true
+        type: choice
+        default: "data/kundbas.csv"
+        options:
+          - "data/kundbad.csv"
+          - "data/kundbas_ny_leverans.csv"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -74,7 +83,9 @@ jobs:
         run: pip install -e ".[dev]"
 
       - name: Validate original customer data
-        run: python -m kontroller.validate_data data/kundbas.csv
+        env:
+          DATAFIL: ${{ inputs.datafil || 'data/kundbas.csv' }}
+        run: python -m kontroller.validate_data $"DATAFIL"
 
 
   train:
