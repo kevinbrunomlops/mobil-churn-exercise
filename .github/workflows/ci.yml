@@ -36,7 +36,7 @@ on:
         type: choice
         default: "data/kundbas.csv"
         options:
-          - "data/kundbad.csv"
+          - "data/kundbas.csv"
           - "data/kundbas_ny_leverans.csv"
 
 concurrency:
@@ -85,7 +85,7 @@ jobs:
       - name: Validate original customer data
         env:
           DATAFIL: ${{ inputs.datafil || 'data/kundbas.csv' }}
-        run: python -m kontroller.validate_data $"DATAFIL"
+        run: python -m kontroller.validate_data "$DATAFIL"
 
 
   train:
